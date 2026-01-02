@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import pymysql
 import plotly.express as px
 
 # ---------------- PAGE CONFIG ----------------
@@ -17,12 +16,8 @@ st.markdown(
 # ---------------- DATABASE LOAD ----------------
 @st.cache_data
 def load_data():
-    conn = pymysql.connect(
-        host="localhost",
-        user="root",
-        password="Divyasenthil123",
-        database="earthquake_db"
-    )
+    df = pd.read_csv("earthquakes.csv", parse_dates=["time"])
+    return df
 
     query = """
     SELECT 
